@@ -1,0 +1,442 @@
+{
+	"info": {
+		"_postman_id": "9ca65638-e823-4271-bfda-bd23c63084bd",
+		"name": "API_Automation_Testcases",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "13693377"
+	},
+	"item": [
+		{
+			"name": "TC01_StatusCode",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// use the `pm.*` API to write your test\r",
+							"// the `pm.test()` method accepts 2 parameters\r",
+							"// the first parameter is the name of your test (be descriptive)\r",
+							"// the second parameter is a function whereby if any assertions within your function fail, then the test will fail\r",
+							"\r",
+							"pm.test(\"Status test\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"        // make an assertion\r",
+							"    // if your assertion throws an error, this test will fail\r",
+							"    pm.response.to.be.ok;\r",
+							"    pm.response.to.be.json;\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "lang",
+						"value": "en",
+						"type": "text"
+					},
+					{
+						"key": "curl",
+						"value": "location",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://api.qa.soum.sa/api-v2/rest/api/v1/product/?page%20number=2&size=3",
+					"protocol": "https",
+					"host": [
+						"api",
+						"qa",
+						"soum",
+						"sa"
+					],
+					"path": [
+						"api-v2",
+						"rest",
+						"api",
+						"v1",
+						"product",
+						""
+					],
+					"query": [
+						{
+							"key": "page%20number",
+							"value": "2"
+						},
+						{
+							"key": "size",
+							"value": "3"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "TC02_ResponseTime",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response time is less than 1000ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "lang",
+						"value": "en",
+						"type": "text"
+					},
+					{
+						"key": "curl",
+						"value": "location",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://api.qa.soum.sa/api-v2/rest/api/v1/product/?page%20number=2&size=3",
+					"protocol": "https",
+					"host": [
+						"api",
+						"qa",
+						"soum",
+						"sa"
+					],
+					"path": [
+						"api-v2",
+						"rest",
+						"api",
+						"v1",
+						"product",
+						""
+					],
+					"query": [
+						{
+							"key": "page%20number",
+							"value": "2"
+						},
+						{
+							"key": "size",
+							"value": "3"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "TC04_Total_Products_Pages",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response message is 'Get Products successfully'\", function () {",
+							"    pm.expect(pm.response.json().message).to.equal('Get Products successfully');",
+							"});",
+							"",
+							"pm.test(\"Returns total products and total pages\", function () {",
+							"    let jsonData = pm.response.json();",
+							"    pm.expect(jsonData.responseData.info.total).to.equal(461053);",
+							"    pm.expect(jsonData.responseData.info.pages).to.equal(153685);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "lang",
+						"value": "en",
+						"type": "text"
+					},
+					{
+						"key": "curl",
+						"value": "location",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://api.qa.soum.sa/api-v2/rest/api/v1/product/?page%20number=2&size=3",
+					"protocol": "https",
+					"host": [
+						"api",
+						"qa",
+						"soum",
+						"sa"
+					],
+					"path": [
+						"api-v2",
+						"rest",
+						"api",
+						"v1",
+						"product",
+						""
+					],
+					"query": [
+						{
+							"key": "page%20number",
+							"value": "2"
+						},
+						{
+							"key": "size",
+							"value": "3"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "TC03_DataType",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Language header is present\", function () {\r",
+							"    pm.request.to.have.header(\"lang\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Content-Type is JSON\", function () {\r",
+							"    pm.response.to.be.json;\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "lang",
+						"value": "en",
+						"type": "text"
+					},
+					{
+						"key": "curl",
+						"value": "location",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://api.qa.soum.sa/api-v2/rest/api/v1/product/?page%20number=2&size=3",
+					"protocol": "https",
+					"host": [
+						"api",
+						"qa",
+						"soum",
+						"sa"
+					],
+					"path": [
+						"api-v2",
+						"rest",
+						"api",
+						"v1",
+						"product",
+						""
+					],
+					"query": [
+						{
+							"key": "page%20number",
+							"value": "2"
+						},
+						{
+							"key": "size",
+							"value": "3"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "TC05_Products_Data_Validate",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Product images array is present and not empty\", function () {",
+							"    const responseData = pm.response.json();",
+							"",
+							"    pm.expect(responseData.responseData.results).to.be.an('array');",
+							"    responseData.responseData.results.forEach(function (result) {",
+							"        pm.expect(result.product_images).to.be.an('array').and.to.have.lengthOf.at.least(1);",
+							"    });",
+							"});",
+							"",
+							"pm.test(\"Each id in the response is unique\", function () {",
+							"    const responseData = pm.response.json().responseData;",
+							"    const ids = new Set();",
+							"    ",
+							"    responseData.results.forEach((result) => {",
+							"        pm.expect(ids.has(result.id)).to.be.false;",
+							"        ids.add(result.id);",
+							"    });",
+							"});",
+							"",
+							"// Test for the presence and data type of description in the response",
+							"pm.test(\"Description property exists and is a string\", function () {",
+							"    var responseData = pm.response.json().responseData;",
+							"    var description = responseData.results[0].description;",
+							"    pm.expect(description).to.be.a('string');",
+							"    pm.expect(description).to.exist;",
+							"});",
+							"// Test for the presence of answer_to_questions",
+							"pm.test(\"Each product has answer to questions present\", function () {",
+							"    pm.response.json().responseData.results.forEach(function(product) {",
+							"        pm.expect(product.answer_to_questions).to.exist;",
+							"    })",
+							"});",
+							"pm.test(\"Each product grade is a string\", function () {",
+							"    var products = pm.response.json().responseData.results;",
+							"    products.forEach(function(product) {",
+							"        pm.expect(product.grade).to.be.a('string');",
+							"    });",
+							"});",
+							"",
+							"pm.test(\"Each product score is a number\", function () {",
+							"    var products = pm.response.json().responseData.results;",
+							"    products.forEach(function(product) {",
+							"        pm.expect(product.score).to.be.a('number');",
+							"    });",
+							"});",
+							"pm.test(\"Sell status is present and has a valid value\", function () {",
+							"    const responseData = pm.response.json();",
+							"    ",
+							"    pm.expect(responseData).to.be.an('object');",
+							"   pm.expect(responseData.responseData).to.have.property('results').that.is.an('array').and.not.empty;",
+							"    ",
+							"    responseData.responseData.results.forEach(function(result) {",
+							"        pm.expect(result).to.have.property('isExpired').that.is.a('boolean');",
+							"    });",
+							"});",
+							"pm.test(\"Approved status is present in the response and is a boolean value\", function () {",
+							"    const responseData = pm.response.json();",
+							"    ",
+							"    pm.expect(responseData).to.have.property('responseData');",
+							"    pm.expect(responseData.responseData).to.have.property('results').that.is.an('array').and.not.empty;",
+							"    ",
+							"    responseData.responseData.results.forEach(function(result) {",
+							"        pm.expect(result).to.have.property('isApproved').that.is.a('boolean');",
+							"    });",
+							"});",
+							"pm.test(\"Expired status is present and is a boolean value\", function () {",
+							"    const responseData = pm.response.json();",
+							"    ",
+							"    pm.expect(responseData).to.have.property('responseData');",
+							"    pm.expect(responseData.responseData).to.have.property('results').that.is.an('array').and.not.empty;",
+							"    ",
+							"    responseData.responseData.results.forEach(function(result) {",
+							"        pm.expect(result).to.have.property('isExpired').that.is.a('boolean');",
+							"    });",
+							"});",
+							"",
+							"pm.test(\"All pickup address fields are present and have valid data\", function () {",
+							"    var pickupAddress = pm.response.json().responseData.results[0].pick_up_address;",
+							"    ",
+							"    pm.expect(pickupAddress).to.have.property('address_id').that.is.a('string');",
+							"    pm.expect(pickupAddress).to.have.property('address').that.is.a('string');",
+							"    pm.expect(pickupAddress).to.have.property('city').that.is.a('string');",
+							"    pm.expect(pickupAddress).to.have.property('postal_code').that.is.a('string');",
+							"    pm.expect(pickupAddress).to.have.property('address_type').that.is.a('string');",
+							"    pm.expect(pickupAddress).to.have.property('latitude').that.is.a('string');",
+							"    pm.expect(pickupAddress).to.have.property('longitude').that.is.a('string');",
+							"});",
+							"",
+							"pm.test(\"All date fields have valid formats\", function () {",
+							"    var product = pm.response.json().responseData.results[0];",
+							"",
+							"    pm.expect(product).to.have.property('createdDate').that.is.a('string').and.matches(/^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}\\.\\d{3}Z$/);",
+							"    pm.expect(product).to.have.property('updatedDate').that.is.a('string').and.matches(/^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}\\.\\d{3}Z$/);",
+							"    pm.expect(product).to.have.property('expiryDate').that.is.a('string').and.matches(/^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}\\.\\d{3}Z$/);",
+							"    pm.expect(product).to.have.property('image_updated').that.is.a('string').and.matches(/^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}\\.\\d{3}Z$/);",
+							"});",
+							"",
+							"pm.test(\"Status field in the response is 'success'\", function () {",
+							"    const responseData = pm.response.json();",
+							"    ",
+							"    pm.expect(responseData.status).to.equal(\"success\");",
+							"});",
+							"",
+							"",
+							"pm.test(\"Timestamp field matches the format 'YYYY-MM-DD HH:mm:ss'\", function () {",
+							"    const responseData = pm.response.json();",
+							"    pm.expect(responseData.timeStamp).to.match(/^\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2}$/);",
+							"});",
+							"",
+							"",
+							"pm.test(\"Violations field in the response should be null\", function () {",
+							"    const responseData = pm.response.json();",
+							"",
+							"    pm.expect(responseData.violations).to.equal(null);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "lang",
+						"value": "en",
+						"type": "text"
+					},
+					{
+						"key": "curl",
+						"value": "location",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://api.qa.soum.sa/api-v2/rest/api/v1/product/?page%20number=2&size=3",
+					"protocol": "https",
+					"host": [
+						"api",
+						"qa",
+						"soum",
+						"sa"
+					],
+					"path": [
+						"api-v2",
+						"rest",
+						"api",
+						"v1",
+						"product",
+						""
+					],
+					"query": [
+						{
+							"key": "page%20number",
+							"value": "2"
+						},
+						{
+							"key": "size",
+							"value": "3"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
