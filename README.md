@@ -1,8 +1,8 @@
-**Task 1 **
+**Task 1**
 
 Folder contains the Answer to Task 1 in which I have automated the flows using playwright tool.
 
-**Task 2 **
+**Task 2**
 
 Folder contains the Answer to Task 2 in which I have done API Automation using Postman and Newman.
 
